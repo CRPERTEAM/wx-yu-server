@@ -12,6 +12,4 @@ const AdminSchema = new Schema({
   update_time: Date
 })
 
-const AdminModel = mongoose.model('User', AdminSchema)
-
-export default AdminModel
+export default mongoose.model('Admin', AdminSchema)

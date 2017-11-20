@@ -4,7 +4,7 @@ import AdminModel from '../models/admin'
 import crypto from 'crypto'
 import {
   ERR_SUCCESS,
-  ERR_CUSTOM_MSG,
+  ERR_FAILED,
   ERR_PARAMS_NOT_EXIST
 } from '../utils/errResponse'
 // import { } from 'mongoose';
@@ -48,18 +48,18 @@ class Admin extends Base {
       const admin = await AdminModel.findOne({username})
       console.log('admin: ', admin)
       if (!admin) {
-        return this.baseResponse(res, ERR_CUSTOM_MSG('用户名不存在'))
+        return this.baseResponse(res, ERR_FAILED('用户名不存在'))
       }
       let passwordMd5 = this.passwordEncrypt(password)
       console.log(`passwordMd5: ${passwordMd5}, password: ${admin.password}`)
       if (passwordMd5 === admin.password) {
         return this.baseResponse(res, ERR_SUCCESS('登陆成功'))
       } else {
-        return this.baseResponse(res, ERR_CUSTOM_MSG('登录失败，账号或密码错误'))
+        return this.baseResponse(res, ERR_FAILED('登录失败，账号或密码错误'))
       }
     } catch (err) {
       console.log('我应该捕获到异常了吧', err)
-      return this.baseResponse(res, ERR_CUSTOM_MSG(err.message))
+      return this.baseResponse(res, ERR_FAILED(err.message))
     }
 
     let data = { token: '123456' }
@@ -88,19 +88,20 @@ class Admin extends Base {
     try {
       const admin = await AdminModel.findOne({username})
       if (admin) {
-        return this.baseResponse(res, ERR_CUSTOM_MSG('该用户已经存在'))
+        return this.baseResponse(res, ERR_FAILED('该用户已经存在'))
       } else {
         const passwordMd5 = this.passwordEncrypt(password)
         const newAdmin = {
           username,
           password: passwordMd5,
-          create_time: new Date()
+          create_time: new Date(),
+          update_time: new Date()
         }
         await AdminModel.create(newAdmin)
         return this.baseResponse(res, ERR_SUCCESS('注册成功'))
       }
     } catch (err) {
-      return this.baseResponse(res, ERR_CUSTOM_MSG('注册失败'))
+      return this.baseResponse(res, ERR_FAILED('注册失败'))
     }
   }
 

@@ -5,9 +5,9 @@ export const ERR_SUCCESS = (msg) => {
   }
 }
 
-export const ERR_CUSTOM_MSG = (msg) => {
+export const ERR_FAILED = (msg) => {
   return {
-    errcode: 1000,
+    errcode: 1,
     errmsg: msg
   }
 }
