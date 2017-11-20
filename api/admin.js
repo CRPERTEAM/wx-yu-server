@@ -5,9 +5,12 @@ const router = express.Router()
 
 // login logout 应该都是post，这里只是做模拟测试
 router.route('/login')
-  .get(Admin.login)
+  .post(Admin.login)
 
 router.route('/logout')
-  .get(Admin.logout)
+  .post(Admin.logout)
+
+router.route('/register')
+  .post(Admin.register)
 
 export default router

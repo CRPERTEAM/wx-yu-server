@@ -1,5 +1,8 @@
 import mongoose from 'mongoose'
-import UserSchema from '../schemas/user'
+const Schema = mongoose.Schema
+
+const UserSchema = new Schema({
+})
 
 const UserModel = mongoose.model('User', UserSchema)
 

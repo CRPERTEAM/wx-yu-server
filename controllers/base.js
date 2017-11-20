@@ -3,12 +3,12 @@ class Base {
     this.baseResponse = this.baseResponse.bind(this)
   }
 
-  baseResponse (errcode = 0, errmsg = 'ok', data = {}) {
-    return {
-      'errcode': errcode,
-      'errmsg': errmsg,
+  baseResponse (res, err = {}, data = {}) {
+    return res.json({
+      'errcode': err.errcode,
+      'errmsg': err.errmsg,
       'data': data
-    }
+    })
   }
 }
 
