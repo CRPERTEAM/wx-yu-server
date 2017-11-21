@@ -29,7 +29,7 @@ class GoodsType extends Base {
 
   async getTypes (req, res, next) {
     let params = req.query
-    if (!params) {
+    if (!params || this.isEmptyObject(params)) {
       return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
     }
 
@@ -63,7 +63,7 @@ class GoodsType extends Base {
 
   async addType (req, res, next) {
     let params = req.body
-    if (!params) {
+    if (!params || this.isEmptyObject(params) || !params.value) {
       return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
     }
 
