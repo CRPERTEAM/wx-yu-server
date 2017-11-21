@@ -2,6 +2,7 @@ import express from 'express'
 import users from './users'
 import admin from './admin'
 import goods from './goods'
+import goodsType from './goodsType'
 const router = express()
 
 export default app => {
@@ -16,4 +17,5 @@ export default app => {
   router.use('/users', users)
   router.use('/admin', admin)
   router.use('/goods', goods)
+  router.use('/goodsType', goodsType)
 }

@@ -23,8 +23,6 @@ class Admin extends Base {
    */
   async login (req, res, next) {
     let params = req.body || {}
-    let errcode = 0
-    let errmsg = 'ok'
 
     let token = params.token
     // 如果token存在 则校验token并使用token进行登录
@@ -61,10 +59,6 @@ class Admin extends Base {
       console.log('我应该捕获到异常了吧', err)
       return this.baseResponse(res, ERR_FAILED(err.message))
     }
-
-    let data = { token: '123456' }
-
-    return this.baseResponse(res, { errcode, errmsg }, data)
   }
 
   async logout (req, res, next) {
