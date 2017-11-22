@@ -13,7 +13,7 @@ class Goods extends Base {
   }
 
   async getList (req, res, next) {
-    return this.baseResponse(res, ERR_SUCCESS('商品列表获取成功'))
+    return this.getList(GoodsModel, req.query, res)
   }
 }
 

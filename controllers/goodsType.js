@@ -14,51 +14,8 @@ class GoodsType extends Base {
     this.deleteType = this.deleteType.bind(this)
   }
 
-  async getType (res, id) {
-    try {
-      let type = await GoodsTypeModel.findOne({_id: id})
-      if (type) {
-        return this.baseResponse(res, ERR_SUCCESS('商品类型获取成功'), type)
-      } else {
-        return this.baseResponse(res, ERR_FAILED('不存在该类型'))
-      }
-    } catch (err) {
-      return this.baseResponse(res, ERR_FAILED(err.message))
-    }
-  }
-
   async getTypes (req, res, next) {
-    let params = req.query
-    if (!params || this.isEmptyObject(params)) {
-      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
-    }
-
-    const _id = params._id
-    if (_id) {
-      return this.getType(res, _id)
-    }
-
-    const lastId = params.lastId || 0
-    let findParams = {}
-
-    if (lastId) {
-      findParams['_id'] = {'$lt': lastId}
-    }
-
-    try {
-      let types = await GoodsTypeModel.find(findParams)
-                                      .limit(10)
-                                      .sort({'_id': -1})
-      console.log('types: ', types)
-      if (types) {
-        return this.baseResponse(res, ERR_SUCCESS('商品类型获取成功'), types)
-      } else {
-        return this.baseResponse(res, ERR_FAILED('不存在该类型'))
-      }
-    } catch (err) {
-      console.log('err: ', err.message)
-      return this.baseResponse(res, ERR_FAILED(err.message))
-    }
+    return this.getList(GoodsTypeModel, req.query, res)
   }
 
   async addType (req, res, next) {
