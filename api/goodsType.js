@@ -3,8 +3,12 @@ import GoodsType from '../controllers/goodsType'
 
 const router = express.Router()
 router.route('/')
-  .get(GoodsType.getTypes)
+  .get(GoodsType.getTypeList)
   .post(GoodsType.addType)
+  .patch(GoodsType.updateType)
+
+router.route('/:id')
+  .get(GoodsType.getType)
   .delete(GoodsType.deleteType)
 
 export default router

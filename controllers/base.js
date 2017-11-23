@@ -8,9 +8,9 @@ class Base {
   constructor () {
     this.baseResponse = this.baseResponse.bind(this)
     this.isEmptyObject = this.isEmptyObject.bind(this)
-    this.findList = this.findList.bind(this)
     this.getList = this.getList.bind(this)
     this.getOne = this.getOne.bind(this)
+    this.deleteOne = this.deleteOne.bind(this)
   }
 
   baseResponse (res, err = {}, data = {}) {
@@ -30,13 +30,12 @@ class Base {
     return true
   }
 
-  findList (model, param = {}, limit = 10) {
-    return model.find(param)
-                .limit(limit)
-                .sort({'_id': -1})
-  }
+  async getOne (model, res, params) {
+    if (!params || this.isEmptyObject(params)) {
+      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+    }
 
-  async getOne (model, res, _id) {
+    let id = params.id
     try {
       let one = await model.findOne({_id: id})
       if (one) {
@@ -49,25 +48,95 @@ class Base {
     }
   }
 
-  async getList (model, params, res, ) {
-    const _id = params._id
-    if (_id) {
-      return this.getOne(res, _id)
-    }
-
+  async getList (model, res, params) {
     const lastId = params.lastId || 0
     let findParams = {}
+    let limit = params.limit || 10
 
     if (lastId) {
-      findParams['_id'] = {'$lt': lastId}
+      findParams = {
+        _id: { '$lt': lastId }
+      }
     }
 
     try {
-      let list = await this.findList(model, findParams)
+      // status为0时，找出大于lastId的limit个项，并以_id倒序输出
+      let list = await model.where({status: 0})
+                            .find(findParams)
+                            .limit(limit)
+                            .sort({_id: -1})
       if (list) {
         return this.baseResponse(res, ERR_SUCCESS(`${model.modelName} 列表获取成功`), list)
       } else {
         return this.baseResponse(res, ERR_FAILED('不存在该类型'))
+      }
+    } catch (err) {
+      return this.baseResponse(res, ERR_FAILED(err.message))
+    }
+  }
+
+  async addOne (model, res, params, matchParams = {}) {
+    if (!params || this.isEmptyObject(params)) {
+      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+    }
+
+    try {
+      if (!this.isEmptyObject(matchParams)) {
+        let exist = await model.findOne(matchParams)
+        if (exist) {
+          return this.baseResponse(res, ERR_FAILED(`${model.modelName} 已经存在`))
+        }
+      }
+      let one = await model.create(params)
+      if (one) {
+        return this.baseResponse(res, ERR_SUCCESS(`${model.modelName} 添加成功`), one)
+      } else {
+        return this.baseResponse(res, ERR_FAILED(`${model.modelName} 添加失败`))
+      }
+    } catch (err) {
+      return this.baseResponse(res, ERR_FAILED(err.message))
+    }
+  }
+
+  async deleteOne (model, res, params) {
+    if (!params || this.isEmptyObject(params)) {
+      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+    }
+
+    let id = params.id
+    try {
+      // 判断id是否存在且status为0，则表示可用删除该对象
+      let exist = await model.where({status: 0}).findOne({_id: id})
+      if (!exist) {
+        return this.baseResponse(res, ERR_FAILED(`${model.modelName} 删除对象未找到`))
+      }
+      let one = await model.where({_id: id}).update({status: 1})
+      if (one) {
+        return this.baseResponse(res, ERR_SUCCESS(`${model.modelName} 删除成功`), one)
+      } else {
+        return this.baseResponse(res, ERR_FAILED(`${model.modelName} 删除失败`))
+      }
+    } catch (err) {
+      return this.baseResponse(res, ERR_FAILED(err.message))
+    }
+  }
+
+  async updateOne (model, res, params) {
+    if (!params || this.isEmptyObject(params)) {
+      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+    }
+
+    let id = params.id
+    try {
+      let exist = await model.findOne({_id: id})
+      if (!exist) {
+        return this.baseResponse(res, ERR_FAILED(`${model.modelName} 更新对象未找到`))
+      }
+      let one = await model.where({_id: id}).update(params)
+      if (one) {
+        return this.baseResponse(res, ERR_SUCCESS(`${model.modelName} 更新成功`), one)
+      } else {
+        return this.baseResponse(res, ERR_FAILED(`${model.modelName} 更新失败`))
       }
     } catch (err) {
       return this.baseResponse(res, ERR_FAILED(err.message))

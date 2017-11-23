@@ -1,19 +1,34 @@
 import Base from './base'
 import GoodsModel from '../models/goods'
-import {
-  ERR_SUCCESS,
-  ERR_FAILED,
-  ERR_PARAMS_NOT_EXIST
-} from '../utils/errResponse'
 
 class Goods extends Base {
   constructor () {
     super()
-    this.getList = this.getList.bind(this)
+    this.getGoodsList = this.getGoodsList.bind(this)
+    this.getGoods = this.getGoods.bind(this)
+    this.addGoods = this.addGoods.bind(this)
+    this.deleteGoods = this.deleteGoods.bind(this)
+    this.updateGoods = this.updateGoods.bind(this)
   }
 
-  async getList (req, res, next) {
-    return this.getList(GoodsModel, req.query, res)
+  async getGoodsList (req, res, next) {
+    return this.getList(GoodsModel, res, req.query)
+  }
+
+  async getGoods (req, res, next) {
+    return this.getOne(GoodsModel, res, req.params)
+  }
+
+  async addGoods (req, res, next) {
+    return this.addOne(GoodsModel, res, req.body)
+  }
+
+  async deleteGoods (req, res, next) {
+    return this.deleteOne(GoodsModel, res, req.params)
+  }
+
+  async updateGoods (req, res, net) {
+    return this.updateOne(GoodsModel, res, req.body)
   }
 }
 
