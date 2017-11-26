@@ -96,6 +96,8 @@ class Base {
           return this.jsonData(ERR_FAILED(`${model.modelName} 已经存在`))
         }
       }
+      params['create_time'] = new Date()
+      params['update_time'] = new Date()
       let one = await model.create(params)
       if (one) {
         return this.jsonData(ERR_SUCCESS(`${model.modelName} 添加成功`), one)

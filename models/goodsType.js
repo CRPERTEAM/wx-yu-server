@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 const GoodsTypeSchema = new Schema({
   label: String,
-  value: String,
+  value: {
+    type: String,
+    required: true
+  },
   create_time: Date,
   update_time: Date,
   status: {

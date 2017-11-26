@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 const GoodsSchema = new Schema({
   typeId: String,
-  title: String, // 标题
+  title: { // 标题
+    type: String,
+    required: true
+  },
   desc: String, // 描述
   picture: String, // 图片
   price: Number, // 价格
