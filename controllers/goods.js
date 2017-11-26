@@ -12,23 +12,28 @@ class Goods extends Base {
   }
 
   async getGoodsList (req, res, next) {
-    return this.getList(GoodsModel, res, req.query)
+    let jsonData = await this.getList(GoodsModel, req.query)
+    return res.json(jsonData)
   }
 
   async getGoods (req, res, next) {
-    return this.getOne(GoodsModel, res, req.params)
+    let jsonData = await this.getOne(GoodsModel, req.params)
+    return res.json(jsonData)
   }
 
   async addGoods (req, res, next) {
-    return this.addOne(GoodsModel, res, req.body)
+    let jsonData = await this.addOne(GoodsModel, req.body)
+    return res.json(jsonData)
   }
 
   async deleteGoods (req, res, next) {
-    return this.deleteOne(GoodsModel, res, req.params)
+    let jsonData = await this.deleteOne(GoodsModel, req.params)
+    return res.json(jsonData)
   }
 
   async updateGoods (req, res, net) {
-    return this.updateOne(GoodsModel, res, req.body)
+    let jsonData = await this.updateOne(GoodsModel, req.body)
+    return res.json(jsonData)
   }
 }
 

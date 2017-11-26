@@ -9,7 +9,7 @@ router.route('/')
   .post(Goods.addGoods)
   .patch(Goods.updateGoods)
 
-router.route('/id')
+router.route('/:id')
   .get(Goods.getGoods)
   .delete(Goods.deleteGoods)
 

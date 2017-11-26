@@ -17,32 +17,39 @@ class GoodsType extends Base {
   }
 
   async getType (req, res, next) {
-    let params = req.params
-    return this.getOne(GoodsTypeModel, res, params)
+    let jsonData = await this.getOne(GoodsTypeModel, req.params)
+    return res.json(jsonData)
   }
 
   async getTypeList (req, res, next) {
-    return this.getList(GoodsTypeModel, res, req.query)
+    let jsonData = await this.getList(GoodsTypeModel, req.query)
+    return res.json(jsonData)
   }
 
   async addType (req, res, next) {
     let params = req.body
+    let jsonData = {}
+
     if (!params || this.isEmptyObject(params)) {
-      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+      jsonData = this.jsonData(ERR_PARAMS_NOT_EXIST)
+      return res.json(jsonData)
     }
 
     let matchParams = {
       value: params.value
     }
-    return this.addOne(GoodsTypeModel, res, params, matchParams)
+    jsonData = await this.addOne(GoodsTypeModel, params, matchParams)
+    return res.json(jsonData)
   }
 
   async deleteType (req, res, next) {
-    return this.deleteOne(GoodsTypeModel, res, req.params)
+    let jsonData = await this.deleteOne(GoodsTypeModel, req.params)
+    return res.json(jsonData)
   }
 
   async updateType (req, res, next) {
-    return this.updateOne(GoodsTypeModel, res, req.body)
+    let jsonData = await this.updateOne(GoodsTypeModel, req.body)
+    return res.json(jsonData)
   }
 }
 
