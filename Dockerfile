@@ -1,18 +1,15 @@
 FROM docker.io/node
 
 # 指定工作目录
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /home/Service
+WORKDIR /home/Service
 
 # 将当前目录下的所有文件拷贝到工作目录下
-COPY . /app/
+COPY . /home/Service
 
 # 声明运行时容器提供服务端口
-EXPOSE 80
+EXPOSE 3000
 
-RUN npm install && \
-    npm run build && \
-    cp -r ./dist/* /var/www/html && \
-    rm -rf /app
+RUN npm install
 
-CMD [ "nginx", "-g", "daemon off;" ]
+CMD [ "npm", "start" ]
