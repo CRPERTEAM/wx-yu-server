@@ -1,8 +1,7 @@
-# 安装nginx
-RUN apt-get update && \
-    apt-get install -y nginx
+FROM docker.io/node
 
 # 指定工作目录
+RUN mkdir -p /app
 WORKDIR /app
 
 # 将当前目录下的所有文件拷贝到工作目录下
