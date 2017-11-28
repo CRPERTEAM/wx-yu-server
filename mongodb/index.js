@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+import config from '../config'
+console.log(config)
 
-// let url = 'mongodb://116.62.133.128/test'
-let url = 'mongodb://172.16.162.40/test'
+let url = `${config.mongodb.host}/test`
 mongoose.connect(url, { useMongoClient: true })
 mongoose.Promise = global.Promise
 

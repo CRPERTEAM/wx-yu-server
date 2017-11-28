@@ -4,7 +4,8 @@
   "description": "tybapp server for mock data",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "cross-env NODE_ENV=development node ./bin/www",
+    "deploy": "cross-env NODE_ENV=production node ./bin/www "
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -27,6 +28,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
-    "babel-preset-env": "^1.6.0"
+    "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.1.1"
   }
 }
