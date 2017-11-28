@@ -10,6 +10,6 @@ COPY . /home/Service
 # 声明运行时容器提供服务端口
 EXPOSE 3000
 
-RUN npm install
+RUN yarn install
 
 CMD [ "npm", "start" ]
