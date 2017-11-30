@@ -15,6 +15,7 @@ class Admin extends Base {
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
     this.register = this.register.bind(this)
+    this.getAdminList = this.getAdminList.bind(this)
   }
   /**
    * 登陆接口
@@ -97,6 +98,11 @@ class Admin extends Base {
     } catch (err) {
       return this.baseResponse(res, ERR_FAILED('注册失败'))
     }
+  }
+
+  async getAdminList (req, res, next) {
+    let jsonData = await this.getList(AdminModel, req.query)
+    return res.json(jsonData)
   }
 
   checkToken (token) {

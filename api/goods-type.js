@@ -1,5 +1,5 @@
 import express from 'express'
-import GoodsType from '../controllers/goodsType'
+import GoodsType from '../controllers/goods-type'
 
 const router = express.Router()
 router.route('/')

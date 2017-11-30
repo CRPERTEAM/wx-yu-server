@@ -1,5 +1,5 @@
 import Base from './base'
-import GoodsTypeModel from '../models/goodsType'
+import GoodsTypeModel from '../models/goods-type'
 import {
   ERR_SUCCESS,
   ERR_FAILED,

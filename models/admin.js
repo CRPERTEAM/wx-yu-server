@@ -8,6 +8,7 @@ const AdminSchema = new Schema({
     type: Number,
     default: 1 // 1 为管理员
   },
+  label: String,
   create_time: Date,
   update_time: Date
 })
