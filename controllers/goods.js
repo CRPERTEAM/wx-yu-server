@@ -9,12 +9,6 @@ class Goods extends Base {
     this.addGoods = this.addGoods.bind(this)
     this.deleteGoods = this.deleteGoods.bind(this)
     this.updateGoods = this.updateGoods.bind(this)
-    this.getGoodsField = this.getGoodsField.bind(this)
-  }
-
-  async getGoodsField (req, res, next) {
-    let jsonData = await this.getFields(GoodsModel, req.query)
-    return res.json(jsonData)
   }
 
   async getGoodsList (req, res, next) {

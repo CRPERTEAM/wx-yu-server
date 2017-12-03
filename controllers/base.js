@@ -12,7 +12,6 @@ class Base {
     this.getOne = this.getOne.bind(this)
     this.deleteOne = this.deleteOne.bind(this)
     this.jsonData = this.jsonData.bind(this)
-    this.getFields = this.getFields.bind(this)
   }
 
   baseResponse (res, err = {}, data = {}) {
@@ -38,10 +37,6 @@ class Base {
       }
     }
     return true
-  }
-
-  async getFields (model, params) {
-    
   }
 
   async getOne (model, params) {
