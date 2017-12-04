@@ -1,10 +1,10 @@
-import express from 'express'
-import path from 'path'
-import logger from 'morgan'
-import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
-import api from './api'
-import './mongodb'
+import express from 'express'; // express 框架
+import path from 'path'; // 内置模块
+import logger from 'morgan'; // 日志中间件,有多种模式,也可以自定义输出格式
+import cookieParser from 'cookie-parser'; // cookie res parser
+import bodyParser from 'body-parser'; // body res parser
+import api from './api'; // api
+import './mongodb';
 
 const app = express()
 

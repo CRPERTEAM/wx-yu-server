@@ -1,4 +1,4 @@
-import Base from './base'
+import Base from './base'; // 引入接口实现的基类
 import GoodsTypeModel from '../models/goods-type'
 import {
   ERR_SUCCESS,
@@ -9,23 +9,22 @@ import {
 class GoodsType extends Base {
   constructor () {
     super()
-    this.getType = this.getType.bind(this)
-    this.getTypeList = this.getTypeList.bind(this)
-    this.addType = this.addType.bind(this)
-    this.deleteType = this.deleteType.bind(this)
-    this.updateType = this.updateType.bind(this)
   }
 
+
+  // 获取类型
   async getType (req, res, next) {
     let jsonData = await this.getOne(GoodsTypeModel, req.params)
     return res.json(jsonData)
   }
 
+  // 获取类型列表
   async getTypeList (req, res, next) {
     let jsonData = await this.getList(GoodsTypeModel, req.query)
     return res.json(jsonData)
   }
 
+  // 添加类型
   async addType (req, res, next) {
     let params = req.body
     let jsonData = {}
@@ -42,11 +41,13 @@ class GoodsType extends Base {
     return res.json(jsonData)
   }
 
+  // 删除类型
   async deleteType (req, res, next) {
     let jsonData = await this.deleteOne(GoodsTypeModel, req.params)
     return res.json(jsonData)
   }
 
+  // 更新类型
   async updateType (req, res, next) {
     let jsonData = await this.updateOne(GoodsTypeModel, req.body)
     return res.json(jsonData)

@@ -1,21 +1,17 @@
-import Base from './base'
+import Base from './base';
 // import jwt from 'express-jwt'
-import AdminModel from '../models/admin'
-import crypto from 'crypto'
+import AdminModel from '../models/admin';
+import crypto from 'crypto';
 import {
   ERR_SUCCESS,
   ERR_FAILED,
   ERR_PARAMS_NOT_EXIST
-} from '../utils/errResponse'
+} from '../utils/errResponse'; // 错误的回调封装
 // import { } from 'mongoose';
 
 class Admin extends Base {
   constructor () {
-    super()
-    this.login = this.login.bind(this)
-    this.logout = this.logout.bind(this)
-    this.register = this.register.bind(this)
-    this.getAdminList = this.getAdminList.bind(this)
+    super();
   }
   /**
    * 登陆接口
@@ -72,48 +68,51 @@ class Admin extends Base {
   async register (req, res, next) {
     let params = req.body || {}
 
-    let username = params.username
-    let password = params.password
+    let username = params.username;
+    let password = params.password;
 
-    if (!username || !password) {
-      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST)
+    if (!username || !password) { // 若是用户名或者密码为空则直接返回错误
+      return this.baseResponse(res, ERR_PARAMS_NOT_EXIST);
     }
 
     try {
-      const admin = await AdminModel.findOne({username})
-      if (admin) {
+      const admin = await AdminModel.findOne({username})  // 查找数据库中的用户名
+      if (admin) { // 如果存在则返回该用户存在且提示
         return this.baseResponse(res, ERR_FAILED('该用户已经存在'))
-      } else {
+      } else { // 否则,则对密码加密并且把相关信息写入用户表
         const passwordMd5 = this.passwordEncrypt(password)
         const newAdmin = {
-          username,
-          password: passwordMd5,
-          create_time: new Date(),
-          update_time: new Date()
+          username,  // 用户名帐号
+          password: passwordMd5, // 用户名密码
+          create_time: new Date(), // 创建时间
+          update_time: new Date() // 更新时间
         }
-        await AdminModel.create(newAdmin)
+        await AdminModel.create(newAdmin); // 接口回调成功则正常返回
         return this.baseResponse(res, ERR_SUCCESS('注册成功'))
       }
-    } catch (err) {
+    } catch (err) { // 反之则失败
       return this.baseResponse(res, ERR_FAILED('注册失败'))
     }
   }
+
 
   async getAdminList (req, res, next) {
     let jsonData = await this.getList(AdminModel, req.query)
     return res.json(jsonData)
   }
 
+  // 验证 token
   checkToken (token) {
     return true
   }
 
+  // 密码进行MD5加密
   passwordEncrypt (password) {
     const md5 = crypto.createHash('md5')
     let salt = 'Thisispassword'
     md5.update(password)
     md5.update(salt)
-    return md5.digest('hex')
+    return md5.digest('hex'); //返回 md5加密后的十六进制字符串
   }
 }
 

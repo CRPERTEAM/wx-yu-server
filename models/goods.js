@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema; // 映射表实例(概要)
 
 const setPrice = (val) => {
   if (!val) {

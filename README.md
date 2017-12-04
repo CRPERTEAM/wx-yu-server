@@ -17,7 +17,9 @@
 - 克隆项目: `git clone https://github.com/CRPERTEAM/wx-yu-server.git`
 - 进入项目: `cd wx-yu-server`
 - 安装依赖: `yarn install` or `npm install`
-- 跑起来: `node app.js` or `pm2 start app.js`
+- 跑起来: (可以自己写配置也可以用 `pm2`)
+ - `npm start` : `package.json`,这条是针对开发模式的
+ - `npm deploy` : 针对线上模式的
 
 
 ### 目录结构

@@ -1,23 +1,26 @@
-import mongoose from 'mongoose'
-import config from '../config'
-console.log(config)
+import mongoose from "mongoose"; // 操作 mongodb 的第三方库
+import config from "../config"; // 抽离的配置文件
+console.log(config);
 
-let url = `${config.mongodb.host}/test`
-mongoose.connect(url, { useMongoClient: true })
-mongoose.Promise = global.Promise
+const DATABASE_URL  = config.mongodb.host; // 数据库URL
+const DATABASE_OPT = config.mongodb.opt; // 数据库链接的可选项
+const db = mongoose.createConnection(DATABASE_URL, DATABASE_OPT);
+mongoose.Promise = global.Promise;
 
-const db = mongoose.connection
+// 打开数据库
+db.once("open", () => {
+  console.log("连接数据库成功");
+});
 
-db.once('open', () => {
-  console.log('连接数据库成功')
-})
+// 数据库报错
+db.on("error", err => {
+  console.log("Error in MongoDB connection: ", err);
+  mongoose.disconnect();
+});
 
-db.on('error', (err) => {
-  console.log('Error in MongoDB connection: ', err)
-  mongoose.disconnect()
-})
-
-db.on('close', () => {
-  console.log('数据库断开， 重连ing')
-  mongoose.connect(url, { server: { auto_reconnect: true } })
-})
+// 关闭数据库
+db.on("close", () => {
+  console.log("数据库断开， 重连ing");
+  // 若是数据库失联则重新链接数据库
+  mongoose.createConnection(DATABASE_URL, DATABASE_OPT);
+});

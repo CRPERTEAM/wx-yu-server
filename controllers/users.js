@@ -1,6 +1,5 @@
 class Users {
   constructor () {
-    this.getUserinfo = this.getUserinfo.bind(this)
   }
   async getUserinfo (req, res, next) {
     return res.json({

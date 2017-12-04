@@ -1,8 +1,8 @@
-import express from 'express'
+import express from 'express'; // expresss
 
-import Goods from '../controllers/goods'
+import Goods from '../controllers/goods'; //接口实现
 
-const router = express.Router()
+const router = express.Router(); // 路由初始化
 
 router.route('/')
   .get(Goods.getGoodsList)

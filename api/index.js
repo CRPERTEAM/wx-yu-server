@@ -6,15 +6,14 @@ import goodsType from './goods-type'
 const router = express()
 
 export default app => {
-  app.all('*', (req, res, next) => {
+  app.all('*', (req, res, next) => { // CORS 的开放访问
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,PATCH,DELETE,OPTIONS')
     res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
-    next()
+    next();
   })
   app.all('*', (req, res, next) => {
-    
-    
+
     next()
   })
   app.use('/api', router)

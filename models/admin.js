@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+import mongoose from "mongoose"; // 操作 mongodb 的一个关联库
+const Schema = mongoose.Schema; // 映射表实例(概要)
 
 const AdminSchema = new Schema({
   username: String,
@@ -11,6 +11,6 @@ const AdminSchema = new Schema({
   label: String,
   create_time: Date,
   update_time: Date
-})
+});
 
-export default mongoose.model('Admin', AdminSchema)
+export default mongoose.model("Admin", AdminSchema);
