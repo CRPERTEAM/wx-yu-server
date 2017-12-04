@@ -1,5 +1,6 @@
 import Base from './base'; // 引入接口实现的基类
 import GoodsTypeModel from '../models/goods-type'
+import { isEmptyObject, jsonData } from '../utils/common'
 import {
   ERR_SUCCESS,
   ERR_FAILED,
@@ -14,13 +15,13 @@ class GoodsType extends Base {
 
   // 获取类型
   async getType (req, res, next) {
-    let jsonData = await this.getOne(GoodsTypeModel, req.params)
+    let jsonData = await super.getOne(GoodsTypeModel, req.params)
     return res.json(jsonData)
   }
 
   // 获取类型列表
   async getTypeList (req, res, next) {
-    let jsonData = await this.getList(GoodsTypeModel, req.query)
+    let jsonData = await super.getList(GoodsTypeModel, req.query)
     return res.json(jsonData)
   }
 
@@ -29,27 +30,27 @@ class GoodsType extends Base {
     let params = req.body
     let jsonData = {}
 
-    if (!params || this.isEmptyObject(params)) {
-      jsonData = this.jsonData(ERR_PARAMS_NOT_EXIST)
+    if (!params || isEmptyObject(params)) {
+      jsonData = retJsonData(ERR_PARAMS_NOT_EXIST)
       return res.json(jsonData)
     }
 
     let matchParams = {
       value: params.value
     }
-    jsonData = await this.addOne(GoodsTypeModel, params, matchParams)
+    jsonData = await super.addOne(GoodsTypeModel, params, matchParams)
     return res.json(jsonData)
   }
 
   // 删除类型
   async deleteType (req, res, next) {
-    let jsonData = await this.deleteOne(GoodsTypeModel, req.params)
+    let jsonData = await super.deleteOne(GoodsTypeModel, req.params)
     return res.json(jsonData)
   }
 
   // 更新类型
   async updateType (req, res, next) {
-    let jsonData = await this.updateOne(GoodsTypeModel, req.body)
+    let jsonData = await super.updateOne(GoodsTypeModel, req.body)
     return res.json(jsonData)
   }
 }

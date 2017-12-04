@@ -1,9 +1,10 @@
 module.exports = {
   mongodb: {
     host: 'mongodb://localhost',
-    opt:{
+    database: '/test',
+    opt: {
       useMongoClient: true,
-      auto_reconnect: true // 自动重连
+      autoReconnect: true // 自动重连
     }
   }
 }
