@@ -29,7 +29,6 @@ class Admin extends Base {
     // 如果token存在 则校验token并使用token进行登录
     if (token) {
       if (checkToken(token)) {
-
       } else {
 
       }
