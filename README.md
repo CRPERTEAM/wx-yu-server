@@ -25,45 +25,40 @@
 ```bash
 ├── .babelrc
 ├── .gitignore
-├── Dockerfile
+├── Dockerfile // Docker配置文件
 ├── README.md
-├── api
-│   ├── admin.js
-│   ├── goods-type.js
-│   ├── goods.js
-│   ├── index.js
-│   └── users.js
-├── app.js
+├── api // API接口目录
+│   ├── admin.js // 权限相关，包含登录、注册、登出等接口
+│   ├── goods-type.js // 商品类型接口
+│   ├── goods.js // 商品接口
+│   ├── index.js // API入口文件
+│   └── users.js // 用户表接口
+├── app.js // server入口
 ├── bin
-│   └── www
-├── config
-│   ├── development.js
-│   ├── index.js
-│   └── production.js
-├── controllers
-│   ├── admin.js
-│   ├── base.js
-│   ├── goods-type.js
+│   └── www // server启动相关
+├── config // 根据环境参数配置
+│   ├── development.js // 开发环境config
+│   ├── index.js
+│   └── production.js // 生产环境config
+├── controllers // controllers目录 处理接口逻辑相关代码
+│   ├── admin.js
+│   ├── base.js // 接口基础逻辑基类
+│   ├── goods-type.js
 │   ├── goods.js
 │   └── users.js
-├── middlewares
-│   └── check-api-token.js
-├── models
-│   ├── admin.js
+├── middlewares // 中间件目录
+│   └── check-api-token.js
+├── models // mogogose模型，Schema也在此处定义
+│   ├── admin.js
 │   ├── goods-type.js
 │   ├── goods.js
 │   └── user.js
-├── mongodb
-│   └── index.js
+├── mongodb // mongdb启动相关
+│   └── index.js
 ├── package-lock.json
 ├── package.json
-├── public
-│   └── stylesheets
-├── routes
-│   ├── index.js
-│   └── users.js
-├── utils
-│   ├── common.js
+├── utils // 常用方法
+│   ├── common.js
 │   ├── errResponse.js
 │   └── token.js
 └── yarn.lock
