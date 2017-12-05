@@ -5,9 +5,11 @@
 
 ### TODOS
 
-- [ ] `JWT`鉴权
+- [ ] `JWT`鉴权,使用`express-jwt`
 - [ ] `restful` 风格 `API`
 - [x] `MongoDB`接入(使用`mongoose`)
+- [x] `morgan`用来日志输出
+- [x] `crypto`内置模块用来加密密码这些
 
 
 
@@ -17,9 +19,13 @@
 - 克隆项目: `git clone https://github.com/CRPERTEAM/wx-yu-server.git`
 - 进入项目: `cd wx-yu-server`
 - 安装依赖: `yarn install` or `npm install`
-- 跑起来: (可以自己写配置也可以用 `pm2`)
- - `npm start` : `package.json`,这条是针对开发模式的
- - `npm deploy` : 针对线上模式的
+- 跑起来: (可以自己写配置也可以用 `pm2`,)
+ - `npm start` : `package.json`,这条是针对开发模式的 .
+ - `npm deploy` : 针对线上模式的 .
+
+**若是安装了`pm2`也可以用后面的命令**
+- PM2启动服务: `npm run pm2start`
+- PM2重启服务: `npm run pm2restart`
 
 
 ### 目录结构

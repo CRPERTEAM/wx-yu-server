@@ -1,11 +1,13 @@
 {
-  "name": "tybapp-server",
+  "name": "wx-yu-server",
   "version": "1.0.1",
-  "description": "tybapp server for mock data",
+  "description": "wx-yu-server restful API",
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
-    "deploy": "cross-env NODE_ENV=production node ./bin/www "
+    "deploy": "cross-env NODE_ENV=production node ./bin/www ",
+    "pm2start": "cross-env NODE_ENV=development pm2 start ./bin/www",
+    "pm2restart": "cross-env NODE_ENV=production pm2 restart 0"
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -21,7 +23,17 @@
     "mongoose": "^4.13.3",
     "morgan": "~1.9.0"
   },
-  "author": "lyh2668",
+  "contributors": [
+    {
+      "name": "contributors",
+      "url": "https://github.com/lyh2668"
+    },
+    {
+      "name": "crper",
+      "email": "crper@outlook.com",
+      "url": "https://github.com/crper"
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -2,17 +2,12 @@ import {
   ERR_SUCCESS,
   ERR_FAILED,
   ERR_PARAMS_NOT_EXIST
-} from "../utils/errResponse"; // 错误的回调封装
-import {
-  baseResponse,
-  retJsonData,
-  isEmptyObject
-} from '../utils/common'
+} from '../utils/errResponse'; // 错误的回调封装
+import { baseResponse, retJsonData, isEmptyObject } from '../utils/common';
 
 // 接口的基类
 class Base {
-  constructor() {
-  }
+  constructor() {}
   // 获取一条记录
   async getOne(model, params) {
     // 若是参数不存在或者参数为空则返回对应的错误回调
@@ -25,7 +20,7 @@ class Base {
       if (one) {
         return retJsonData(ERR_SUCCESS(`${model.modelName} 获取成功`), one);
       } else {
-        return retJsonData(ERR_FAILED("不存在该类型"));
+        return retJsonData(ERR_FAILED('不存在该类型'));
       }
     } catch (err) {
       return retJsonData(ERR_FAILED(err.message));
@@ -56,13 +51,14 @@ class Base {
           list
         );
       } else {
-        return retJsonData(ERR_FAILED("不存在该类型"));
+        return retJsonData(ERR_FAILED('不存在该类型'));
       }
     } catch (err) {
       return retJsonData(ERR_FAILED(err.message));
     }
   }
 
+  // 增加一条记录
   async addOne(model, params, matchParams = {}) {
     // 若是参数不存在或者参数为空则返回对应的错误回调
     if (!params || isEmptyObject(params)) {
@@ -76,8 +72,8 @@ class Base {
           return retJsonData(ERR_FAILED(`${model.modelName} 已经存在`));
         }
       }
-      params["create_time"] = new Date();
-      params["update_time"] = new Date();
+      params['create_time'] = new Date();
+      params['update_time'] = new Date();
       let one = await model.create(params);
       if (one) {
         return retJsonData(ERR_SUCCESS(`${model.modelName} 添加成功`), one);

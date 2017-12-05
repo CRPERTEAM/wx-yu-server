@@ -7,4 +7,4 @@ module.exports = {
       autoReconnect: true // 自动重连
     }
   }
-}
+};
