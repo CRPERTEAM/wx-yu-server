@@ -1,13 +1,4 @@
 {
-  "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
-    }], "stage-3"],
-  "plugins": ["transform-runtime",
-              "transform-export-extensions",
-              "transform-async-to-generator",
-              "transform-es2015-modules-commonjs"]
+  "presets": ["stage-3", "es2015"],
+  "plugins": ["transform-runtime"]
 }

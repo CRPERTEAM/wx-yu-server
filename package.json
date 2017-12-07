@@ -1,6 +1,6 @@
 {
   "name": "wx-yu-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "wx-yu-server restful API",
   "private": true,
   "scripts": {
@@ -9,21 +9,28 @@
     "pm2start": "cross-env NODE_ENV=development pm2 start ./bin/www",
     "pm2restart": "cross-env NODE_ENV=production pm2 restart 0"
   },
+  "keywords": ["wechat", "mall", "node", "express", "mongodb", "mongoose"],
+  "homepage": "https://github.com/CRPERTEAM/wx-yu-server",
+  "bugs": {
+    "url": "https://github.com/CRPERTEAM/wx-yu-server/issues"
+  },
   "dependencies": {
-    "babel": "^6.23.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-stage-3": "^6.24.1",
-    "babel-register": "^6.26.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
-    "crypto": "^1.0.1",
-    "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "debug": "~3.1.0",
+    "express": "~4.16.2",
     "express-jwt": "^5.3.0",
-    "mongoose": "^4.13.3",
+    "mongoose": "^4.13.6",
     "morgan": "~1.9.0"
   },
-  "contributors": [
+  "devDependencies": {
+    "cross-env": "^5.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-stage-3": "^6.24.1"
+  },
+  "maintainers": [
     {
       "name": "contributors",
       "url": "https://github.com/lyh2668"
@@ -34,13 +41,5 @@
       "url": "https://github.com/crper"
     }
   ],
-  "license": "ISC",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-export-extensions": "^6.22.0",
-    "babel-preset-env": "^1.6.0",
-    "cross-env": "^5.1.1"
-  }
+  "license": "MIT"
 }

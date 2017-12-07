@@ -80,3 +80,7 @@
 若是该项目顺利完工的情况下.
 会考虑在下一个迭代版本引入`GraphQL`
 `express 4`更换为`Koa 2`
+
+# License
+
+MIT
