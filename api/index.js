@@ -3,6 +3,7 @@ import users from './users'
 import admin from './admin'
 import goods from './goods'
 import goodsType from './goods-type'
+import Order from './order'
 const router = express()
 
 export default app => {
@@ -22,4 +23,5 @@ export default app => {
   router.use('/admin', admin)
   router.use('/goods', goods)
   router.use('/goods-type', goodsType)
+  router.use('/order', Order)
 }
