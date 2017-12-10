@@ -21,5 +21,5 @@ export default app => {
   router.use('/users', users)
   router.use('/admin', admin)
   router.use('/goods', goods)
-  router.use('/goodsType', goodsType)
+  router.use('/goods-type', goodsType)
 }

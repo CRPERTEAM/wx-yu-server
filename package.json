@@ -9,7 +9,14 @@
     "pm2start": "cross-env NODE_ENV=development pm2 start ./bin/www",
     "pm2restart": "cross-env NODE_ENV=production pm2 restart 0"
   },
-  "keywords": ["wechat", "mall", "node", "express", "mongodb", "mongoose"],
+  "keywords": [
+    "wechat",
+    "mall",
+    "node",
+    "express",
+    "mongodb",
+    "mongoose"
+  ],
   "homepage": "https://github.com/CRPERTEAM/wx-yu-server",
   "bugs": {
     "url": "https://github.com/CRPERTEAM/wx-yu-server/issues"
