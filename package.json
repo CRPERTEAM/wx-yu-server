@@ -1,6 +1,6 @@
 {
   "name": "wx-yu-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "wx-yu-server restful API",
   "private": true,
   "scripts": {
@@ -37,11 +37,8 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-stage-3": "^6.24.1"
   },
-  "maintainers": [
-    {
-      "name": "contributors",
-      "url": "https://github.com/lyh2668"
-    },
+  "author": "lyh2668 <lyh2668@163.com>",
+  "contributors": [
     {
       "name": "crper",
       "email": "crper@outlook.com",
