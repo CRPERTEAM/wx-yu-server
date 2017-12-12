@@ -1,5 +1,6 @@
 import Base from './base'
 import GoodsModel from '../models/goods'
+import GoodsTypeModel from '../models/goods-type'
 
 class Goods extends Base {
   constructor () {
@@ -9,14 +10,40 @@ class Goods extends Base {
   // 获取商品列表
   async getGoodsList (req, res, next) {
     console.log('getGoodsList')
-    let jsonData = await super.getList(GoodsModel, req.query)
-    return res.json(jsonData)
+    try {
+      let jsonData = await super.getList(GoodsModel, req.query)
+      let goodsList = jsonData.data
+      for (let i = 0; i < goodsList.length; ++i) {
+        let goods = goodsList[i]
+        if ('typeId' in goods) {
+          let params = { id: goods.typeId }
+          let goodsType = await super.getOne(GoodsTypeModel, params)
+          let goodsLabel = goodsType.data.label
+          jsonData.data[i].typeLabel = goodsLabel
+        }
+      }
+      return res.json(jsonData)
+    } catch (err) {
+      throw err
+    }
   }
 
   // 获取商品
   async getGoods (req, res, next) {
-    let jsonData = await super.getOne(GoodsModel, req.params)
-    return res.json(jsonData)
+    // base类封装的已经包含的了errcode & errmsg，方便了错误处理，但是关联查询的时候会带来一定的繁琐，这个地方需要稍微考量一下
+    try {
+      let goods = await super.getOne(GoodsModel, req.params)
+      // 可能不会有typeId
+      if ('typeId' in goods.data) {
+        let params = { id: goods.data.typeId }
+        let goodsType = await super.getOne(GoodsTypeModel, params)
+        let goodsLabel = goodsType.data.label
+        goods.data['typeLabel'] = goodsLabel
+      }
+      return res.json(goods)
+    } catch (err) {
+      throw err
+    }
   }
 
   // 添加商品

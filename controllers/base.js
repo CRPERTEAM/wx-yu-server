@@ -114,7 +114,8 @@ class Base {
       return retJsonData(ERR_PARAMS_NOT_EXIST);
     }
 
-    let id = params.id;
+    let id = params._id;
+    console.log('params: ', params)
     try {
       let exist = await model.findOne({ _id: id });
       if (!exist) {
