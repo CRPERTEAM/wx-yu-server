@@ -1,10 +1,13 @@
 import express from 'express'
-import users from './users'
-import admin from './admin'
-import goods from './goods'
-import goodsType from './goods-type'
+
+import Users from './users'
+import Admin from './admin'
+import Goods from './goods'
+import GoodsType from './goods-type'
 import Order from './order'
-const router = express()
+import Upload from './upload'
+
+
 
 export default app => {
   app.all('*', (req, res, next) => { // CORS 的开放访问
@@ -17,11 +20,13 @@ export default app => {
 
     next()
   })
-  app.use('/api', router)
 
-  router.use('/users', users)
-  router.use('/admin', admin)
-  router.use('/goods', goods)
-  router.use('/goods-type', goodsType)
+  const router = express()
+  app.use('/api', router)
+  router.use('/users', Users)
+  router.use('/admin', Admin)
+  router.use('/goods', Goods)
+  router.use('/goods-type', GoodsType)
   router.use('/order', Order)
+  router.use('/upload', Upload)
 }
