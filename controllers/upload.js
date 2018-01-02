@@ -20,7 +20,10 @@ const fileFilter = (req, file, cb) => {
 const _upload = multer({
   dest: 'uploads/',
   fileFilter: fileFilter,
-  preservePath: true
+  preservePath: true,
+  limits: {
+    fileSize: 2 * 1024 * 1024 // limits 2M
+  }
 }).single('avatar')
 
 class Upload {
@@ -32,8 +35,6 @@ class Upload {
           errmsg: err.message
         })
       }
-
-      console.log(req.file)
 
       if (!req.file) {
         return res.json({
