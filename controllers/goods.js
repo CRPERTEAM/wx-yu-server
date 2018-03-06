@@ -11,22 +11,6 @@ class Goods extends Base {
   async getGoodsList (req, res, next) {
     try {
       let jsonData = await super.getList(GoodsModel, req.query)
-      let goodsList = jsonData.data
-      for (let i = 0; i < goodsList.length; ++i) {
-        let goods = goodsList[i].toJSON()
-        if ('typeIds' in goods) {
-          let goodsLabels = []
-          for (let j = 0; j < goods.typeIds.length; ++j) {
-            let typeId = goods.typeIds[j]
-            let params = { id: typeId }
-            let goodsType = await super.getOne(GoodsTypeModel, params)
-            goodsLabels.push(goodsType.data.label)
-          }
-          goods.typeLabels = goodsLabels.join(',')
-          goodsList[i] = goods
-        }
-      }
-      jsonData.data = goodsList
       return res.json(jsonData)
     } catch (err) {
       throw err
@@ -38,20 +22,6 @@ class Goods extends Base {
     // base类封装的已经包含的了errcode & errmsg，方便了错误处理，但是关联查询的时候会带来一定的繁琐，这个地方需要稍微考量一下
     try {
       let jsonData = await super.getOne(GoodsModel, req.params)
-      // let goods = Object.assign({}, jsonData.data)._doc
-      let goods = jsonData.data.toJSON()
-      // 可能不会有typeId
-      if ('typeIds' in goods) {
-        let goodsLabels = []
-        for (let i = 0; i < goods.typeIds.length; ++i) {
-          let typeId = goods.typeIds[i]
-          let params = { id: typeId }
-          let goodsType = await super.getOne(GoodsTypeModel, params)
-          goodsLabels.push(goodsType.data.label)
-        }
-        goods.typeLabels = goodsLabels.join(',')
-        jsonData.data = goods
-      }
       return res.json(jsonData)
     } catch (err) {
       throw err
@@ -60,6 +30,7 @@ class Goods extends Base {
 
   // 添加商品
   async addGoods (req, res, next) {
+    console.log('addGoods: ', req.body)
     let jsonData = await super.addOne(GoodsModel, req.body)
     return res.json(jsonData)
   }

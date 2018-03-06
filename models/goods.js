@@ -17,7 +17,7 @@ const getPrice = val => {
 };
 
 const GoodsSchema = new Schema({
-  typeIds: [String],
+  types: [{label: String, value: String}],
   title: {
     // 标题
     type: String,

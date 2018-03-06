@@ -4,8 +4,7 @@ const Schema = mongoose.Schema; // 映射表实例(概要)
 const GoodsTypeSchema = new Schema({
   label: String, // 商品标签
   value: {
-    type: String,
-    required: true
+    type: String
   },
   create_time: Date, // 创建时间
   update_time: Date, // 更新时间
