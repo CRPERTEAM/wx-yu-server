@@ -23,7 +23,7 @@ class Admin extends Base {
    * 1. 用账号密码登陆的情况下，先判断账号密码的正确与否，然后通过jwt生成token
    * 2. 用token登陆，验证token
    */
-  async login(req, res, next) {
+  login = async (req, res, next) => {
     let params = req.body || {};
 
     let token = params.token;
@@ -61,7 +61,7 @@ class Admin extends Base {
     }
   }
 
-  async logout(req, res, next) {
+  logout = async (req, res, next) => {
     console.log(baseResponse());
     return res.json(baseResponse());
   }
@@ -69,7 +69,7 @@ class Admin extends Base {
   /**
    * 注册接口
    */
-  async register(req, res, next) {
+  register = async (req, res, next) => {
     let params = req.body || {};
 
     let username = params.username;
@@ -103,13 +103,13 @@ class Admin extends Base {
     }
   }
 
-  async getAdminList(req, res, next) {
-    let jsonData = await super.getList(AdminModel, req.query);
+  getAdminList = async (req, res, next) => {
+    let jsonData = await this.getList(AdminModel, req.query);
     return res.json(jsonData);
   }
 
   // 验证 token
-  checkToken(token) {
+  checkToken = (token) => {
     return true;
   }
 }

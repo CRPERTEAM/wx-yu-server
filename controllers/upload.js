@@ -27,7 +27,7 @@ const _upload = multer({
 }).single('avatar')
 
 class Upload {
-  uploadProfile (req, res, next) {
+  uploadProfile = (req, res, next) => {
     _upload (req, res, err => {
       if (err) {
         return res.json({

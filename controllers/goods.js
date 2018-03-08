@@ -8,9 +8,9 @@ class Goods extends Base {
   }
 
   // 获取商品列表
-  async getGoodsList (req, res, next) {
+  getGoodsList = async (req, res, next) => {
     try {
-      let jsonData = await super.getList(GoodsModel, req.query)
+      let jsonData = await this.getList(GoodsModel, req.query)
       return res.json(jsonData)
     } catch (err) {
       throw err
@@ -18,10 +18,10 @@ class Goods extends Base {
   }
 
   // 获取商品
-  async getGoods (req, res, next) {
+  getGoods = async (req, res, next) => {
     // base类封装的已经包含的了errcode & errmsg，方便了错误处理，但是关联查询的时候会带来一定的繁琐，这个地方需要稍微考量一下
     try {
-      let jsonData = await super.getOne(GoodsModel, req.params)
+      let jsonData = await this.getOne(GoodsModel, req.params)
       return res.json(jsonData)
     } catch (err) {
       throw err
@@ -29,22 +29,30 @@ class Goods extends Base {
   }
 
   // 添加商品
-  async addGoods (req, res, next) {
+  addGoods = async (req, res, next) => {
     console.log('addGoods: ', req.body)
-    let jsonData = await super.addOne(GoodsModel, req.body)
+    this.validator(req.body)
+    let jsonData = await this.addOne(GoodsModel, req.body)
     return res.json(jsonData)
   }
 
   // 删除商品
   async deleteGoods (req, res, next) {
-    let jsonData = await super.deleteOne(GoodsModel, req.params)
+    let jsonData = await this.deleteOne(GoodsModel, req.params)
     return res.json(jsonData)
   }
 
   // 更新商品
-  async updateGoods (req, res, net) {
-    let jsonData = await super.updateOne(GoodsModel, req.body)
+  updateGoods = async (req, res, net) => {
+    this.validator(req.body)
+    let jsonData = await this.updateOne(GoodsModel, req.body)
     return res.json(jsonData)
+  }
+
+  validator = (data) => {
+    if ('price' in data) {
+      data.price = data.price || 0
+    }
   }
 }
 
